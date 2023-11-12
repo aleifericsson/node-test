@@ -1,84 +1,45 @@
-#!/usr/bin/env node
-
 const http = require('http');
-const hostname = '127.0.0.1';
-const port = 3000;
-const server = http.createServer((req, res) => {//async method, that's why dirname shows first
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
-});
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-
-console.log(__dirname);
-console.log(__filename);
-
-const os = require('os');
-console.log(os.platform());
-
 const fs = require('fs');
+const { handleError,handleErrorRes } = require('./handleError');
 
-/*
-fs.readFile("text.txt", (err,data) => {//also async method
-  if(err){
-    console.log(err);
-  }
-  const str = data.toString().split("\n");
-  const str_fixed = str.map(ele => {return ele.split("").reverse().join("");}).join("\n");
-  console.log(str_fixed);
+const server = http.createServer((request,response) => {//callback function runs every time a request happens. request = data on url, type, response = send to browser.
+    console.log("request made from " +request.url); //note: this message does not show up in devtools because that is frontend, this is backend.
+
+    if (request.url == "/uhuh"){
+        response.setHeader("Content-Type", "text/html");
+        fs.readFile('./index.html',(err,data)=>{
+            if (!handleErrorRes(err)){   
+            response.write(data);
+            response.statusCode = 200;
+            response.end()
+            }
+        })
+    }
+    else if (request.url == "/hidden"){
+        response.statusCode = 301;
+        response.setHeader("Location", "/404");
+        response.end(); 
+    }
+    else if (request.url == "/404"){
+        response.setHeader("Content-Type", "text/html");
+        fs.readFile('./404.html',(err,data)=>{
+            if (!handleErrorRes(err)){   
+            response.write(data);
+            response.statusCode = 404;
+            response.end()
+            }
+        })
+    }
+    else{
+        response.setHeader("Content-Type", "text/plain");
+        response.write("rock");
+        response.statusCode = 200;
+        response.end();
+    }
 });
 
-fs.writeFile("text.txt", `يا لا لا لا لا لا لا
-رجاوي فلسطيني
-يا لا لا لا لا لا لا
-حبيت نمشي شكون يديني`
-,(err) => {//also async method
-  if(err){
-    console.log(err);
-  }
-  console.log("file rewritten");
+server.listen(3000, 'localhost', () =>{ //localhost is 127.0.0.1, which loops back to the computer, local host is the 'door/channel' inside localhost
+    console.log("listening to requests in this portnumber and host")
 });
 
-if(!fs.existsSync("./folder")){
-  fs.mkdir("./folder",(err,data) => {//also async method
-    if(err){
-      console.log(err);
-    }
-  });
-}
-else{
-  fs.rmdir("./folder",(err,data) => {//also async method
-    if(err){
-      console.log(err);
-    }
-  });
-}
-*/
-
-const gloryhammer_stream = fs.createReadStream('gloryhammer_lore.txt', {encoding:"utf8"});
-const copy = fs.createWriteStream('copy.txt')
-
-let num = 1;
-
-gloryhammer_stream.on('data', (chunk) => {//everything you get a new chunk of data...
-  console.log(`chunk #${num}`);
-  num+=1;
-  console.log(chunk);
-  copy.write(chunk);
-}) //alternative: gloryhammer_stream.pipe(copy);
-
-/*
-let seconds = 1;
-
-const interval = setInterval(() => {
-  console.log(`${seconds} seconds have passed`);
-  seconds += 1;
-}, 1000);
-
-setTimeout(() => {
-  console.log("interval stopped");
-  clearInterval(interval);
-}, 10000)
-*/
+//the path: http://127.0.0.1:3000/ or localhost:3000
