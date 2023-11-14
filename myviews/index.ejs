@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tails soccer</title>
+</head>
+<body>
+    <%- include('./nav.ejs') %>
+    <img src="https://media.tenor.com/i3ZaS7KMA-sAAAAd/tails-dance.gif">
+    <nav>
+        <a href="/404">404</a>
+    </nav> 
+    <% let count = 0;%> 
+    <p>count 1: <%= count%></p> <!-- Output to screen: you need = -->
+    <button onclick=<% () => {count = count+1; count2=count2+1;}%>>increment</button>
+    <p>count 2: <%= count%></p>
+</body>
+</html>

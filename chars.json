@@ -1,0 +1,42 @@
+[
+    {
+      "name": "Sonic",
+      "color": "royalblue"
+    },
+    {
+      "name": "Shadow",
+      "color": "darkslategray"
+    },
+    {
+      "name": "Silver",
+      "color": "silver"
+    },
+    {
+      "name": "Knuckles",
+      "color": "crimson"
+    },
+    {
+      "name": "Tails",
+      "color": "orange"
+    },
+    {
+      "name": "Amy",
+      "color": "pink"
+    },
+    {
+      "name": "Blaze",
+      "color": "plum"
+    },
+    {
+      "name": "Whisper",
+      "color": "sandybrown"
+    },
+    {
+      "name": "Tangle",
+      "color": "lightslategray"
+    },
+    {
+      "name": "Rouge",
+      "color": "hotpink"
+    }
+   ]
