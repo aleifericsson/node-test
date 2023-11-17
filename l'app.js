@@ -1,7 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Country = require('./models/countries')
 
 const app = express();
+const dbURI = 'mongodb+srv://whisperSSG8:Qwe123@cluster0.k9znbbq.mongodb.net/database0?retryWrites=true&w=majority';
+mongoose.connect(dbURI)
+    .then((result)=>console.log('connected'))
+    .catch((err)=>console.log(err));
 
 //registe view engine
 app.set('view engine', 'ejs');
@@ -17,6 +23,25 @@ app.use((req, res, next) =>{ //app.get & app.use are both middleware, basically 
 
 app.use(express.static("public"));
 app.use(morgan('dev'));
+
+app.get('/add-country', (req, res) =>{
+    const country = new Country({
+        name: "Indonesia",
+        flag_cols: ["Red", "White"],
+        visited: true,
+        rating: 6
+    });
+
+    country.save()
+        .then((result)=>{res.send(result)})
+        .catch((err)=>console.log(err));
+});
+
+app.get('/all-countries', (req, res) => {
+    Country.find() //returns list of everything, there is also findById() to use the unique id thingies.
+        .then((result)=>{res.send(result)})
+        .catch((err)=>console.log(err)); //result sorted by id (i think), you can use .sort to sort by createdAt time
+})
 
 const fs = require('fs');
 let chars;
