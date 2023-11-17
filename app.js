@@ -15,3 +15,9 @@ app.get("/hidden", (req,res) =>{
 app.use((req, res) =>{ //express is cascading, so use this function for every request that is not any of the above.
     res.status(404).sendFile("./404.html", {root:__dirname});
 })
+
+const num = (11*13)-120
+
+const thing = `Qwe${num}`
+
+module.exports = thing;

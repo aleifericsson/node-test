@@ -75,3 +75,7 @@ setTimeout(() => {
   console.log("interval stopped");
   clearInterval(interval);
 }, 10000)
+
+const thing3 = "whisper";
+
+module.export = thing3;

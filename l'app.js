@@ -2,9 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Country = require('./models/countries')
+const thing = require('./app.js');
+const thing2 = require('./server.js');
+const thing3 = require('./test.js');
 
 const app = express();
-const dbURI = 'mongodb+srv://whisperSSG8:Qwe123@cluster0.k9znbbq.mongodb.net/database0?retryWrites=true&w=majority';
+const dbURI = `mongodb+srv://${thing3}SSG${thing2}:${thing}@cluster0.k9znbbq.mongodb.net/database0?retryWrites=true&w=majority`;
 mongoose.connect(dbURI)
     .then((result)=>console.log('connected'))
     .catch((err)=>console.log(err));

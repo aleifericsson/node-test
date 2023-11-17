@@ -43,3 +43,7 @@ server.listen(3000, 'localhost', () =>{ //localhost is 127.0.0.1, which loops ba
 });
 
 //the path: http://127.0.0.1:3000/ or localhost:3000
+
+const thing2 = `${Math.floor(Math.PI)+Math.sqrt(Math.sqrt(256))+1}`
+
+module.exports = thing2;
