@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add country</title>
+</head>
+<body>
+    <form action ="/countries" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="flag-cols">Flag Colours (put space ONLY between colours):</label>
+        <input type="text" id="flag-cols" name="flag-cols" required>
+        <label for="visited">Visited?</label>
+        <input type="checkbox" id="visited" name="visited" required>
+        <label for="rating">Rating:</label>
+        <input type="checkbox" id="rating" name="rating" required>
+    </form>
+</body>
+</html>
