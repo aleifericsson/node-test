@@ -6,15 +6,25 @@
     <title>add country</title>
 </head>
 <body>
-    <form action ="/countries" method="POST">
+    <a href="/">hom</a>
+    <form action ="/add-country" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
+        <p></p>
         <label for="flag-cols">Flag Colours (put space ONLY between colours):</label>
         <input type="text" id="flag-cols" name="flag-cols" required>
+        <p></p>
         <label for="visited">Visited?</label>
-        <input type="checkbox" id="visited" name="visited" required>
+        <label>yeh</label>
+        <input type="radio" id="visited" name="visited" value="true">
+        <label>nah</label>
+        <input type="radio" id="visited" name="visited" value="false">
+        <p></p>
         <label for="rating">Rating:</label>
-        <input type="checkbox" id="rating" name="rating" required>
+        <input type="number" id="rating" name="rating" required>
+        <p></p>
+        <button type="submit">Submit</button>
     </form>
+
 </body>
 </html>

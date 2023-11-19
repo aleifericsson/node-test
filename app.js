@@ -1,3 +1,5 @@
+/*
+
 const express = require('express');
 
 const app = express();
@@ -16,7 +18,9 @@ app.use((req, res) =>{ //express is cascading, so use this function for every re
     res.status(404).sendFile("./404.html", {root:__dirname});
 })
 
-const num = (11*13)-120
+*/
+
+const num = (11*13)-20
 
 const thing = `Qwe${num}`
 

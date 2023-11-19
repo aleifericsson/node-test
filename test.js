@@ -14,6 +14,7 @@ server.listen(port, hostname, () => {
 });
 */
 
+
 console.log(__dirname);
 console.log(__filename);
 
@@ -75,7 +76,3 @@ setTimeout(() => {
   console.log("interval stopped");
   clearInterval(interval);
 }, 10000)
-
-const thing3 = "whisper";
-
-module.export = thing3;

@@ -4,10 +4,9 @@ const mongoose = require('mongoose');
 const Country = require('./models/countries')
 const thing = require('./app.js');
 const thing2 = require('./server.js');
-const thing3 = require('./test.js');
 
 const app = express();
-const dbURI = `mongodb+srv://${thing3}SSG${thing2}:${thing}@cluster0.k9znbbq.mongodb.net/database0?retryWrites=true&w=majority`;
+const dbURI = `mongodb+srv://whisperSSG${thing2}:${thing}@cluster0.k9znbbq.mongodb.net/database0?retryWrites=true&w=majority`;
 mongoose.connect(dbURI)
     .then((result)=>console.log('connected'))
     .catch((err)=>console.log(err));
@@ -25,9 +24,10 @@ app.use((req, res, next) =>{ //app.get & app.use are both middleware, basically 
 })
 
 app.use(express.static("public"));
+app.use(express.urlencoded({extended:true}));
 app.use(morgan('dev'));
 
-app.get('/add-country', (req, res) =>{
+app.get('/test-add', (req, res) =>{
     const country = new Country({
         name: "Indonesia",
         flag_cols: ["Red", "White"],
@@ -37,6 +37,27 @@ app.get('/add-country', (req, res) =>{
 
     country.save()
         .then((result)=>{res.send(result)})
+        .catch((err)=>console.log(err));
+});
+
+
+app.get('/add-country', (req, res) =>{
+    res.render("add_country");
+});
+
+app.post('/add-country', (req, res) =>{
+    console.log(req.body)
+    flags_cols=req.body['flag-cols'].split(' ');
+    vis = (req.body.visited === true);
+    const country = new Country({
+        name: req.body.name,
+        flag_cols: flags_cols,
+        visited: vis,
+        rating: parseInt(req.body.rating)
+    });
+
+    country.save()
+        .then((result)=>{res.redirect("/")})
         .catch((err)=>console.log(err));
 });
 
@@ -54,7 +75,7 @@ fs.readFile("chars.json", (err, data) =>{
 })
 
 app.get("/", (req,res) => { 
-    res.render("index", {count2: 0}); 
+    res.render("index", {count2: 1}); 
 })
 app.get("/404", (req,res) => {
     res.render("404",{chars}); //chars is shorthand for saying chars:chars

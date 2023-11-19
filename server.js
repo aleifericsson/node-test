@@ -1,3 +1,5 @@
+/*
+
 const http = require('http');
 const fs = require('fs');
 const { handleError,handleErrorRes } = require('./handleError');
@@ -41,6 +43,8 @@ const server = http.createServer((request,response) => {//callback function runs
 server.listen(3000, 'localhost', () =>{ //localhost is 127.0.0.1, which loops back to the computer, local host is the 'door/channel' inside localhost
     console.log("listening to requests in this portnumber and host")
 });
+
+*/
 
 //the path: http://127.0.0.1:3000/ or localhost:3000
 
