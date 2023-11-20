@@ -61,6 +61,23 @@ app.post('/add-country', (req, res) =>{
         .catch((err)=>console.log(err));
 });
 
+app.get('/country/:countryID', (req, res) => {
+    const id = req.params.countryID;
+    //sample id: 6559e92e396ca6e0de0985c9
+    Country.findById(new ObjectId(id))
+        .then((result)=>{res.send(result);console.log(result)})
+        .catch((err)=>console.log(err)); 
+});
+
+app.delete('/country/:countryID', (req, res) => {//to send the delete request, must be from frontend (but i too)
+    const id = req.params.countryID;
+    //sample id: 6559e92e396ca6e0de0985c9
+    Country.findById(new ObjectId(id))
+        .then((result)=>{res.json({redirect:"/"})}) //to send a json file back to frontend to redirect via frontend
+        .catch((err)=>console.log(err)); 
+});
+
+
 app.get('/all-countries', (req, res) => {
     Country.find() //returns list of everything, there is also findById() to use the unique id thingies.
         .then((result)=>{res.send(result)})
@@ -68,6 +85,7 @@ app.get('/all-countries', (req, res) => {
 })
 
 const fs = require('fs');
+const { ObjectId } = require('mongodb');
 let chars;
 fs.readFile("chars.json", (err, data) =>{
     if (err) throw err;
